@@ -1,0 +1,57 @@
+export const HERO_KIT_TEMPLATE: Array<{ type: string; label: string }> = [
+  { type: "alter-ego", label: "Alter-ego" },
+  { type: "identity", label: "Identidad" },
+  { type: "support", label: "Apoyo" },
+  { type: "support", label: "Apoyo" },
+  { type: "ally", label: "Aliado" },
+  { type: "event", label: "Evento" },
+  { type: "event", label: "Evento" },
+  { type: "event", label: "Evento" },
+  { type: "event", label: "Evento" },
+  { type: "event", label: "Evento" },
+  { type: "upgrade", label: "Mejora" },
+  { type: "upgrade", label: "Mejora" },
+  { type: "upgrade", label: "Mejora" },
+  { type: "resource", label: "Recurso" },
+  { type: "resource", label: "Recurso" },
+];
+
+export const HERO_KIT_SIZE = HERO_KIT_TEMPLATE.length;
+
+export const TYPE_LABELS: Record<string, string> = {
+  "alter-ego": "Alter-ego",
+  identity: "Identidad",
+  ally: "Aliado",
+  event: "Evento",
+  upgrade: "Mejora",
+  support: "Apoyo",
+  resource: "Recurso",
+  obligation: "Obligación",
+  "player-scheme": "Plan del jugador",
+  villain: "Villano",
+  minion: "Esbirro",
+  attachment: "Vinculada",
+  treachery: "Traición",
+  environment: "Entorno",
+  "side-scheme": "Plan secundario",
+  "main-scheme": "Plan principal",
+};
+
+export const TYPE_ORDER = [
+  "alter-ego",
+  "identity",
+  "obligation",
+  "support",
+  "ally",
+  "event",
+  "upgrade",
+  "resource",
+  "player-scheme",
+  "villain",
+  "minion",
+  "attachment",
+  "treachery",
+  "environment",
+  "side-scheme",
+  "main-scheme",
+];

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MChampions Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,700;0,800;1,700;1,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="app">
+    <section class="preview" aria-label="Vista de la carta">
+      <div class="preview__bar">
+        <strong>Vista</strong>
+        <label>Zoom <input id="zoom" type="range" min="0.22" max="0.55" step="0.01" value="0.34" /></label>
+      </div>
+      <div class="preview__stage">
+        <div class="fit" id="fit">
+          <div class="scale">
+            <article class="card" id="card" data-type="alter-ego" data-family="hero" data-cracks="off">
+              <div class="card__window">
+                <div class="card__photo-wrap">
+                  <img class="card__photo" alt="" />
+                  <div class="card__art"></div>
+                </div>
+                <div class="card__fade"></div>
+              </div>
+              <div class="card__split" hidden></div>
+              <div class="card__cracks" hidden></div>
+              <h2 class="card__title"></h2>
+              <p class="card__subtitle" hidden></p>
+              <div class="card__cost" hidden></div>
+              <div class="card__stat card__stat--thw" hidden></div>
+              <div class="card__stat card__stat--atk" hidden></div>
+              <div class="card__stat card__stat--def" hidden></div>
+              <div class="card__stat card__stat--rec" hidden></div>
+              <div class="card__type"></div>
+              <div class="card__plate">
+                <p class="card__traits"></p>
+                <div class="card__rules"></div>
+                <p class="card__quote" hidden></p>
+              </div>
+              <div class="card__hp" hidden></div>
+              <div class="card__meta" hidden>
+                <div><b class="card__hand"></b><small class="card__hand-label">Mano</small></div>
+                <div><b class="card__hpmeta"></b><small class="card__hp-label">PV</small></div>
+              </div>
+              <div class="card__resources"></div>
+              <div class="card__splash" hidden><img class="card__headshot" alt="" /></div>
+              <div class="card__stage" hidden></div>
+              <div class="card__threat" hidden></div>
+              <div class="card__scheme-no" hidden></div>
+              <div class="card__boosts" hidden></div>
+              <div class="card__attach" hidden></div>
+              <p class="card__set"></p>
+              <p class="card__copy"></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editor" aria-label="Campos de la carta">
+      <header class="editor__head">
+        <div class="brand">
+          <h1>MChampions Manager</h1>
+          <p>Marcos dibujados con CSS. El color es una variable de la carta.</p>
+        </div>
+        <div class="editor__row">
+          <label class="grow">Carta
+            <select id="card-list"></select>
+          </label>
+          <button type="button" id="add-card">Nueva</button>
+          <button type="button" id="copy-card">Duplicar</button>
+          <button type="button" id="delete-card">Borrar</button>
+        </div>
+        <div class="editor__row">
+          <label class="grow">Tipo
+            <select id="card-type"></select>
+          </label>
+          <button type="button" id="download-png">Descargar PNG</button>
+          <button type="button" id="save-json">Guardar JSON</button>
+          <button type="button" id="load-json">Cargar JSON</button>
+          <input id="json-file" type="file" accept="application/json" hidden />
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </header>
+      <form id="fields" class="fields"></form>
+    </section>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

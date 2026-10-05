@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  name         String
+  passwordHash String
+  role         String         @default("user")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  heroKits     HeroKit[]
+  importedDecks ImportedDeck[]
+  cards        Card[]
+}
+
+model HeroKit {
+  id          String   @id @default(cuid())
+  name        String
+  headshotUrl String   @default("")
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  cards       Card[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ImportedDeck {
+  id          String   @id @default(cuid())
+  marvelcdbId Int
+  name        String
+  heroName    String   @default("")
+  aspect      String   @default("")
+  rawJson     String   @default("{}")
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  cards       Card[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([ownerId, marvelcdbId])
+}
+
+model Card {
+  id             String        @id @default(cuid())
+  ownerId        String
+  owner          User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  heroKitId      String?
+  heroKit        HeroKit?      @relation(fields: [heroKitId], references: [id], onDelete: Cascade)
+  importedDeckId String?
+  importedDeck   ImportedDeck? @relation(fields: [importedDeckId], references: [id], onDelete: Cascade)
+  slotIndex      Int
+  quantity       Int           @default(1)
+  marvelcdbCode  String        @default("")
+
+  type       String  @default("event")
+  title      String  @default("")
+  subtitle   String  @default("")
+  typeLabel  String  @default("")
+  traits     String  @default("")
+  rules      String  @default("")
+  quote      String  @default("")
+  copyright  String  @default("")
+  setLine    String  @default("")
+  cost       String  @default("")
+  costStar   Boolean @default(false)
+  thw        String  @default("")
+  thwStar    Boolean @default(false)
+  atk        String  @default("")
+  atkStar    Boolean @default(false)
+  def        String  @default("")
+  defStar    Boolean @default(false)
+  rec        String  @default("")
+  recStar    Boolean @default(false)
+  hp         String  @default("")
+  handSize   String  @default("")
+  identityHp String  @default("")
+  stage      String  @default("")
+  threat     String  @default("")
+  schemeNo   String  @default("")
+  boosts     Int     @default(0)
+  boostStar  Boolean @default(false)
+  attAtk     String  @default("")
+  attSch     String  @default("")
+  resources  String  @default("[\"none\",\"none\",\"none\"]")
+  cracks     Boolean @default(true)
+  showSplash Boolean @default(true)
+  starSplash Boolean @default(false)
+  darkText   Boolean @default(false)
+  aspect     String  @default("")
+  left       String  @default("#ba8c2c")
+  leftAccent String  @default("#ffb81d")
+  right      String  @default("#263b80")
+  rightAccent String @default("#6f93c4")
+  divider    String  @default("#d9d3c7")
+  outer      String  @default("#87868f")
+  outerAccent String @default("#c5c4c8")
+  gradTop    String  @default("#6e6d76")
+  gradBottom String  @default("#2b2a2f")
+  photo      String  @default("")
+  photoZoom  Float   @default(1)
+  photoX     Float   @default(0)
+  photoY     Float   @default(0)
+  headshot   String  @default("")
+  headZoom   Float   @default(1)
+  headX      Float   @default(0)
+  headY      Float   @default(0)
+  appPreview String  @default("")
+  fullCardPhoto Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([heroKitId, slotIndex])
+  @@index([importedDeckId, slotIndex])
+}
